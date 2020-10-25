@@ -1,0 +1,3 @@
+<div class="card-wrapper">
+  <img *ngFor="let number of numbers; let i = index" src="assets/cards/card-back.png" alt="card back" [ngStyle]="{'left':getMoveFromLeft(i)}">
+</div>
