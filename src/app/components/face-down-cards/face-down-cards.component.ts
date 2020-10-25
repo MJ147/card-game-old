@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-face-down-cards',
@@ -6,21 +7,25 @@ import { Component, ElementRef, Input, OnInit } from '@angular/core';
   styleUrls: ['./face-down-cards.component.less']
 })
 export class FaceDownCardsComponent implements OnInit {
+  @HostBinding('style') style;
   @Input() set numberOfCards(numberOfCards: number) {
-      this.numbers = Array(numberOfCards).fill(0);
+    this.numbers = Array(numberOfCards).fill(0);
   }
-  @Input() cardOverlap: number;
+  @Input() cardOverlap = 1;
+  @Input() set direction(direction: string) {
+    if (direction === 'vertical') {
+      this.style = this._sanitizer.bypassSecurityTrustStyle('display: block; transform-origin: top left; transform: rotate(-90deg) translate(-100%);');
+    }
+  }
   numbers: number[];
-  maxCardsSpaceWidth: number;
+  maxCardsSpace: number;
   cardWidth = 200;
 
-  constructor(private _element: ElementRef) { }
+  constructor(private _element: ElementRef, private _sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    this.maxCardsSpaceWidth = this._element.nativeElement.clientWidth;
-    console.log(this._element);
-
-    if (this.cardsSpaceWidth > this.maxCardsSpaceWidth){
+    this.maxCardsSpace = this.direction === 'vertical' ? this._element.nativeElement.clientHeight : this._element.nativeElement.clientWidth;
+    if (this.cardsSpaceWidth > this.maxCardsSpace){
       this.adjustCardOverlap();
     }
   }
@@ -34,8 +39,15 @@ export class FaceDownCardsComponent implements OnInit {
   }
 
   adjustCardOverlap(): void {
-    const outSideCardSpace = this.cardsSpaceWidth - this.maxCardsSpaceWidth;
+    const outSideCardSpace = this.cardsSpaceWidth - this.maxCardsSpace;
     const cardMoveCorrection = outSideCardSpace / (this.numbers.length - 1);
     this.cardOverlap = this.cardOverlap - cardMoveCorrection;
+  }
+
+  getdirection(): string {
+    if (this.direction !== 'horizontal') {
+      return 'left';
+    }
+    return 'top';
   }
 }
