@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { MaterialModule } from './material.module';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -9,20 +10,24 @@ import { DeckComponent } from './components/deck/deck.component';
 import { ShowCardsComponent } from './components/show-cards/show-cards.component';
 import { FaceDownCardsComponent } from './components/face-down-cards/face-down-cards.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { StartComponent } from './components/start/start.component';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    TableComponent,
-    ForeignPlayerCardsComponent,
-    PlayerCardsComponent,
-    DeckComponent,
-    ShowCardsComponent,
-    FaceDownCardsComponent
-  ],
-  imports: [
-    BrowserModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		TableComponent,
+		ForeignPlayerCardsComponent,
+		PlayerCardsComponent,
+		DeckComponent,
+		ShowCardsComponent,
+		FaceDownCardsComponent,
+		StartComponent,
+	],
+	imports: [BrowserModule, MaterialModule, HttpClientModule, AppRoutingModule, BrowserAnimationsModule],
+	providers: [],
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

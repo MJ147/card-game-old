@@ -86,7 +86,7 @@
 		"comment-type": [true, "doc", "singleline", "directive"],
 		"one-variable-per-declaration": true,
 		"variable-name": {
-			"options": ["ban-keywords", "check-format", "allow-pascal-case"]
+			"options": ["ban-keywords", "check-format", "allow-pascal-case", "allow-leading-underscore"]
 		},
 		"whitespace": {
 			"options": ["check-branch", "check-decl", "check-operator", "check-separator", "check-type", "check-typecast"]
