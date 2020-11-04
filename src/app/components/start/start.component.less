@@ -1,26 +1,92 @@
-@mat-primary: #9e9e9e;
+@mat-grey: #9e9e9e;
+@mat-deep-purple: #673ab7;
+@mat-accent-green: #69f0ae;
 
 :host {
-	background-color: @mat-primary;
+	background-color: @mat-grey;
 	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.button-wrapper {
+::ng-deep input {
+	color: @mat-accent-green !important;
+}
+
+::ng-deep {
+	/*change color of label*/
+	.mat-form-field-label {
+		color: white !important;
+	}
+	/*change color of underline*/
+	.mat-form-field-underline {
+		background-color: white !important;
+	}
+	/*change color of underline when focused*/
+	.mat-form-field-ripple {
+		background-color: white !important;
+	}
+}
+
+.menu {
 	display: flex;
 	flex-direction: column;
+	width: 220px;
 
-	width: 200px;
-	height: 150px;
+	mat-card {
+		padding: 24px;
 
-	.flex-space {
-		flex: 1;
+		::ng-deep .mat-card-header-text {
+			width: 100%;
+			margin: 0;
+			text-align: center;
+
+			mat-card-title {
+				font-size: large;
+				font-weight: 400;
+			}
+		}
+		mat-form-field {
+			margin-top: 10px;
+			width: 100%;
+		}
 	}
 
-	button {
+	mat-expansion-panel {
+		background-color: @mat-deep-purple;
+		margin-top: 20px;
+
+		mat-expansion-panel-header {
+			height: 50px;
+		}
+
+		mat-panel-title {
+			margin-right: 0;
+		}
+
+		span {
+			width: 100%;
+			font-size: large;
+			text-align: center !important;
+		}
+
+		.create-button {
+			width: 100%;
+			font-size: large;
+			font-weight: 400;
+		}
+
+		mat-form-field {
+			margin-top: 10px;
+			width: 100%;
+		}
+	}
+
+	.join-button {
+		margin-top: 20px;
+		height: 50px;
 		font-size: large;
-		flex: 3;
+		font-weight: 400;
 	}
 }

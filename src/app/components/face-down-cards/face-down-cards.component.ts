@@ -28,9 +28,6 @@ export class FaceDownCardsComponent implements OnInit {
 	ngOnInit(): void {
 		// this.maxCardsSpace = this.rotation === 90 ? this._element.nativeElement.clientHeight : this._element.nativeElement.clientWidth;
 		if (this.cardsSpaceWidth > this.maxCardsSpace) {
-			console.log('card space width: ' + this.cardsSpaceWidth);
-			console.log('max cards space: ' + this.maxCardsSpace);
-
 			this.adjustCardOverlap();
 		}
 	}
@@ -45,10 +42,7 @@ export class FaceDownCardsComponent implements OnInit {
 
 	adjustCardOverlap(): void {
 		const outSideCardSpace = this.cardsSpaceWidth - this.maxCardsSpace;
-		console.log(this.cardsSpaceWidth);
 		const cardMoveCorrection = outSideCardSpace / (this.numbers.length - 1);
-		console.log(outSideCardSpace);
-
 		this.cardOverlap = this.cardOverlap - cardMoveCorrection;
 	}
 

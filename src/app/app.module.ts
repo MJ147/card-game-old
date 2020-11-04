@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StartComponent } from './components/start/start.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TablesBoardComponent } from './components/tables-board/tables-board.component';
 
 @NgModule({
 	declarations: [
@@ -25,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		ShowCardsComponent,
 		FaceDownCardsComponent,
 		StartComponent,
+		TablesBoardComponent,
 	],
 	imports: [BrowserModule, MaterialModule, HttpClientModule, AppRoutingModule, BrowserAnimationsModule],
 	providers: [],

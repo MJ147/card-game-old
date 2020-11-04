@@ -7,11 +7,11 @@ export interface Table {
 }
 
 export interface Player {
-	id: number;
+	id?: number;
 	name: string;
-	sex: string;
-	age: number;
-	cards: Card[];
+	sex?: string;
+	age?: number;
+	cards?: Card[];
 }
 
 export interface DeckDto {
