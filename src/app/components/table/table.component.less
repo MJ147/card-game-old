@@ -1,5 +1,49 @@
-app-face-down-cards {
-  display: block;
-  width: 500px;
-  height: 300px;
+.row-wrapper {
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: stretch;
+}
+
+.column {
+	width: 220px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.column-center {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+
+	.row {
+		height: 220px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.row-center {
+		display: flex;
+		flex: 1;
+
+		.left,
+		.right {
+			display: flex;
+			flex: 1;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.center {
+			display: flex;
+			flex: 3;
+			align-items: center;
+			justify-content: center;
+		}
+	}
 }
