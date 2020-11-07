@@ -8,32 +8,34 @@ import { Player } from 'src/app/models/table';
 import { of } from 'rxjs';
 
 @Component({
-	selector: 'app-start',
-	templateUrl: './start.component.html',
-	styleUrls: ['./start.component.less'],
+	selector: 'app-start-menu',
+	templateUrl: './start-menu.component.html',
+	styleUrls: ['./start-menu.component.less'],
 })
-export class StartComponent implements OnInit {
-	readonly IPN: string = 'Invalid player name, try again';
+export class StartMenuComponent implements OnInit {
+	readonly ITN: string = 'Invalid table name, try again';
+	player: Player;
 	playerName: FormControl = new FormControl('', Validators.required);
+	tableName: FormControl = new FormControl('', Validators.required);
 
 	constructor(private _http: HttpService, private _router: Router, private _snackBar: MatSnackBar) {}
 
-	ngOnInit(): void {
-		localStorage.clear();
-	}
+	ngOnInit(): void {}
 
-	createPlayer(): void {
-		if (!this.isFormControlValid(this.playerName, this.IPN)) {
+	createTable(): void {
+		if (!this.isFormControlValid(this.tableName, this.ITN)) {
 			return;
 		}
 		const player: Player = {
 			name: this.playerName.value,
 		};
-
-		this._http.createPlayer(player).subscribe((playerId) => {
-			this.setPlayerIdInLocalStorage(playerId);
-			this._router.navigate(['menu']);
+		this._http.createTable(this.tableName.value, this.playerIdFromLocalStorage).subscribe((tableId) => {
+			this._router.navigate(['table', tableId]);
 		});
+	}
+
+	openTablesBoard(): void {
+		this._router.navigate(['tables']);
 	}
 
 	isFormControlValid(formControl: FormControl, message: string): boolean {
@@ -45,7 +47,7 @@ export class StartComponent implements OnInit {
 	}
 
 	// TODO: change temporary solution with local storage to BEARER
-	setPlayerIdInLocalStorage(playerId: number): void {
-		localStorage.setItem('playerId', playerId.toString());
+	get playerIdFromLocalStorage(): string {
+		return localStorage.getItem('playerId');
 	}
 }
