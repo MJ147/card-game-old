@@ -5,13 +5,16 @@
 		</mat-card-header>
 		<mat-card-content>
 			<div>Table name: {{ table.name }}</div>
-			<div>Players: {{ table.players }}</div>
+			<div>
+				Players:
+				<span *ngFor="let player of table.players; index as i">{{ player.name }}{{ table.players[i + 1] ? ', ' : '' }}</span>
+			</div>
 		</mat-card-content>
 		<mat-card-actions>
-			<button mat-raised-button color="accent" (click)="openTable(table)">JOIN</button>
+			<button mat-raised-button color="accent" (click)="joinTable(table)">JOIN</button>
 		</mat-card-actions>
 	</mat-card>
-	<mat-card>
+	<mat-card *ngIf="tables?.length <= 0">
 		<mat-card-header>
 			<mat-card-title>No avaliabe tables</mat-card-title>
 		</mat-card-header>

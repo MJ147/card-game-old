@@ -8,7 +8,7 @@ export interface Table {
 
 export interface Player {
 	id?: number;
-	name: string;
+	name?: string;
 	sex?: string;
 	age?: number;
 	cards?: Card[];

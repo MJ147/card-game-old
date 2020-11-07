@@ -1,7 +1,7 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Player, Table } from './../../models/table';
+import { Table } from './../../models/table';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/http/http.service';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -11,6 +11,7 @@ import { FormControl, Validators } from '@angular/forms';
 	styleUrls: ['./tables-board.component.less'],
 })
 export class TablesBoardComponent implements OnInit {
+	readonly ITN: string = 'Invalid table name, try again';
 	tableName: FormControl = new FormControl('', Validators.required);
 	tables: Table[];
 
@@ -23,19 +24,34 @@ export class TablesBoardComponent implements OnInit {
 	getAllTables(): void {
 		this._http.getAllTables().subscribe((tables) => {
 			this.tables = tables;
+			console.log(tables);
 		});
 	}
-	openTable(table: Table): void {
-		this._router.navigate(['table', table.id]);
+	joinTable(table: Table): void {
+		this._http.addPlayer(table.id.toString(), localStorage.getItem('playerId')).subscribe(() => {
+			this._router.navigate(['table', table.id]);
+		});
 	}
 
 	createTable(): void {
-		if (this.tableName.invalid) {
-			this._snackBar.open('Invalid table name.', null, { duration: 1000 });
+		if (!this.isFormControlValid(this.tableName, this.ITN)) {
 			return;
 		}
-		this._http.createTable(this.tableName.value).subscribe((tableId) => {
+		this._http.createTable(this.tableName.value, this.playerIdFromLocalStorage).subscribe((tableId) => {
 			this._router.navigate(['table', tableId]);
 		});
+	}
+
+	isFormControlValid(formControl: FormControl, message: string): boolean {
+		if (formControl.invalid) {
+			this._snackBar.open(message, null, { duration: 1000 });
+			return false;
+		}
+		return true;
+	}
+
+	// TODO: change temporary solution with local storage to BEARER
+	get playerIdFromLocalStorage(): string {
+		return localStorage.getItem('playerId');
 	}
 }

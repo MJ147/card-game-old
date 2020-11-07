@@ -6,19 +6,9 @@
 		<mat-card-content>
 			<mat-form-field name="playerName">
 				<mat-label>Player name</mat-label>
-				<input matInput autocomplete="off" [formControl]="playerName" />
+				<input matInput autocomplete="off" maxlength="20" [formControl]="playerName" />
 			</mat-form-field>
+			<button mat-raised-button color="accent" class="create-button" (click)="createPlayer()">CREATE PLAYER</button>
 		</mat-card-content>
 	</mat-card>
-	<mat-expansion-panel hideToggle>
-		<mat-expansion-panel-header>
-			<mat-panel-title> <span>CREATE NEW TABLE</span> </mat-panel-title>
-		</mat-expansion-panel-header>
-		<mat-form-field name="tableName">
-			<mat-label>Table name</mat-label>
-			<input matInput autocomplete="off" [formControl]="tableName" />
-		</mat-form-field>
-		<button mat-raised-button color="accent" class="create-button" (click)="createTable()">CREATE</button>
-	</mat-expansion-panel>
-	<button mat-raised-button class="join-button" (click)="openTablesBoard()">JOIN TABLE</button>
 </div>

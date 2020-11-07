@@ -15,6 +15,7 @@ import { StartComponent } from './components/start/start.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TablesBoardComponent } from './components/tables-board/tables-board.component';
+import { StartMenuComponent } from './components/start-menu/start-menu.component';
 
 @NgModule({
 	declarations: [
@@ -27,6 +28,7 @@ import { TablesBoardComponent } from './components/tables-board/tables-board.com
 		FaceDownCardsComponent,
 		StartComponent,
 		TablesBoardComponent,
+		StartMenuComponent,
 	],
 	imports: [BrowserModule, MaterialModule, HttpClientModule, AppRoutingModule, BrowserAnimationsModule],
 	providers: [],
